@@ -10,6 +10,8 @@ TagManager:
   - FlameRight
   - Explosion
   - Impact
+  - Tunnel
+  - Obstacle
   layers:
   - Default
   - TransparentFX
