@@ -10,6 +10,7 @@ TagManager:
   - FlameRight
   - Explosion
   - Impact
+  - Tunnel
   layers:
   - Default
   - TransparentFX
