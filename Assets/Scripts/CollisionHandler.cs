@@ -15,6 +15,8 @@ public class CollisionHandler : MonoBehaviour
 
     }
 
+    public int GetLivesRemaining() { return lives; }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Tunnel") || collision.gameObject.CompareTag("Obstacle"))
@@ -25,7 +27,7 @@ public class CollisionHandler : MonoBehaviour
                 player.StartCrashParticles();
                 Invoke("Reset", 3f);
             }
-            else if(lives > 0)
+            else if (lives > 0)
             {
                 player.StartImpactParticles();
             }
