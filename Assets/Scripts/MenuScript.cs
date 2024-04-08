@@ -8,11 +8,9 @@ public class MenuScript : MonoBehaviour
     [SerializeField]
     private Camera mainCamera;
     private PlayerScript playerScript;
-    private HealthScript healthScript;
     void Start()
     {
         playerScript = FindAnyObjectByType(typeof(PlayerScript)).GetComponent<PlayerScript>();
-        healthScript = FindAnyObjectByType(typeof(HealthScript)).GetComponent<HealthScript>();
     }
 
     void OnMouseDown()
@@ -21,7 +19,6 @@ public class MenuScript : MonoBehaviour
         {
             menuCamera.enabled = false;
             playerScript.StartGame();
-            healthScript.DisplayHealth();
         } else if (gameObject.name == "Quit")
         {
             Application.Quit();

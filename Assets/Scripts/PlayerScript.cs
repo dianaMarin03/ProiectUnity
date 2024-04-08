@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -15,12 +16,25 @@ public class PlayerScript : MonoBehaviour
     private ParticleSystem flameRight;
     private ParticleSystem explosion;
     private ParticleSystem impact;
+    private HealthScript healthScript;
+
+    [SerializeField]
+    private AudioClip rocketSound;
+    [SerializeField]
+    private AudioClip boostSound;
+
+    //private SoundManager soundManager;
 
     void Start()
     {
         GetFlameParticles();
         rb = GetComponent<Rigidbody>();
+        healthScript = FindAnyObjectByType(typeof(HealthScript)).GetComponent<HealthScript>();
         rb.AddForce(Vector3.forward * 3.0f, ForceMode.Impulse); // give an initial impulse
+        //soundManager = FindObjectOfType<SoundManager>();
+        if (SceneManager.GetActiveScene().name == "Level2Scene")
+            StartGame();
+
     }
 
     void Update()
@@ -28,17 +42,22 @@ public class PlayerScript : MonoBehaviour
         if (start)
         {
             if (isAlive)
-            {                
+            {
                 if (Input.GetKey(KeyCode.Space))
                 {
                     TurnOffParticles();
                     ReduceSpeed();
                     rb.useGravity = true;
                 }
-                else if (Input.GetKey(KeyCode.LeftShift)) { Boost(); }
+                else if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    //soundManager.PlaySound(boostSound);
+                    Boost();
+                }
                 else
                 {
                     TurnOnParticles();
+                    //soundManager.PlaySound(rocketSound);
                     rb.velocity = Camera.main.transform.forward * 15.0f;
                 }
 
@@ -58,7 +77,19 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public void StartGame() { start = true; rb.isKinematic = false; }
+    public void StartGame()
+    {
+        start = true; rb.isKinematic = false;
+        healthScript.DisplayHealth();
+    }
+
+    public void DisablePlayer()
+    {
+        start = false;
+        rb.isKinematic = true;
+        TurnOffParticles();
+    }
+
     #region MOVEMENT
     private void MoveUp()
     {

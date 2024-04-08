@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealthScript : MonoBehaviour
 {
@@ -11,9 +12,18 @@ public class HealthScript : MonoBehaviour
     private int lives;
     void Start()
     {
-        Health1.gameObject.SetActive(false);
-        Health2.gameObject.SetActive(false);
-        Health3.gameObject.SetActive(false);
+        if (SceneManager.GetActiveScene().name == "Level2Scene")
+        {
+            Health1.gameObject.SetActive(true);
+            Health2.gameObject.SetActive(true);
+            Health3.gameObject.SetActive(true);
+        }
+        else
+        {
+            Health1.gameObject.SetActive(false);
+            Health2.gameObject.SetActive(false);
+            Health3.gameObject.SetActive(false);
+        }
         collisionHandler = FindAnyObjectByType(typeof(CollisionHandler)).GetComponent<CollisionHandler>();
     }
 
