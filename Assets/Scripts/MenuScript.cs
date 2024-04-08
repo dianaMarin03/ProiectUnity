@@ -21,6 +21,7 @@ public class MenuScript : MonoBehaviour
         {
             menuCamera.enabled = false;
             playerScript.StartGame();
+            healthScript.DisplayHealth();
         } else if (gameObject.name == "Quit")
         {
             Application.Quit();
