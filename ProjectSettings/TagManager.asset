@@ -16,6 +16,8 @@ TagManager:
   - PlayerCamera
   - Quit
   - Start
+  - Enemy
+  - final
   layers:
   - Default
   - TransparentFX

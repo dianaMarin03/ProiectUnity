@@ -32,6 +32,17 @@ public class CollisionHandler : MonoBehaviour
                 player.StartImpactParticles();
             }
         }
+        else if (collision.gameObject.tag == "Finish")
+        {
+            if (SceneManager.GetActiveScene().name == "")
+            {
+                Application.Quit();
+            }
+            else
+            {
+                SceneManager.LoadScene("");
+            }
+        }
     }
 
     private void Reset()
