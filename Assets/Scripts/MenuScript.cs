@@ -7,10 +7,21 @@ public class MenuScript : MonoBehaviour
     private Camera menuCamera;
     [SerializeField]
     private Camera mainCamera;
+    [SerializeField]
+    private AudioClip menuSound;
+
+    private SoundManager soundManager;
     private PlayerScript playerScript;
     void Start()
     {
         playerScript = FindAnyObjectByType(typeof(PlayerScript)).GetComponent<PlayerScript>();
+        soundManager = FindObjectOfType<SoundManager>();
+    }
+
+    void Update()
+    {
+        if (!soundManager.checkIfIsPlaying(menuSound))
+            soundManager.PlaySound(menuSound);
     }
 
     void OnMouseDown()
@@ -18,6 +29,7 @@ public class MenuScript : MonoBehaviour
         if(gameObject.name == "Start")
         {
             menuCamera.enabled = false;
+            soundManager.StopSound(menuSound);
             playerScript.StartGame();
         } else if (gameObject.name == "Quit")
         {

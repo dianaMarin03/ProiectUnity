@@ -5,18 +5,18 @@ public class CollisionHandler : MonoBehaviour
 {
     private PlayerScript player;
     private int lives = 3;
-    //private SoundManager soundManager;
-    //[SerializeField]
-    //private AudioClip collisionSound;
-    //[SerializeField]
-    //private AudioClip explosionSound;
-    //[SerializeField]
-    //private AudioClip finishLineSound;
+    private SoundManager soundManager;
+    [SerializeField]
+    private AudioClip collisionSound;
+    [SerializeField]
+    private AudioClip explosionSound;
+    [SerializeField]
+    private AudioClip finishLineSound;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
-        //soundManager = FindObjectOfType<SoundManager>();
+        soundManager = FindObjectOfType<SoundManager>();
     }
 
     void Update()
@@ -33,13 +33,13 @@ public class CollisionHandler : MonoBehaviour
             lives--;
             if (lives == 0)
             {
-                //soundManager.PlaySound(explosionSound);
+                soundManager.PlaySound(explosionSound);
                 player.StartCrashParticles();
                 Invoke("Reset", 3f);
             }
             else if (lives > 0)
             {
-                //soundManager.PlaySound(collisionSound);
+                soundManager.PlaySound(collisionSound);
                 player.StartImpactParticles();
             }
         }
@@ -47,9 +47,9 @@ public class CollisionHandler : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().name == "Level2Scene")
             {
-                //soundManager.PlaySound(finishLineSound);
+                soundManager.PlaySound(finishLineSound);
                 player.DisablePlayer();
-                Invoke("LoadFirstScene", 5f);
+                Invoke("LoadFirstScene", 8f);
             }
             else
             {

@@ -23,7 +23,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private AudioClip boostSound;
 
-    //private SoundManager soundManager;
+    private SoundManager soundManager;
 
     void Start()
     {
@@ -31,7 +31,7 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         healthScript = FindAnyObjectByType(typeof(HealthScript)).GetComponent<HealthScript>();
         rb.AddForce(Vector3.forward * 3.0f, ForceMode.Impulse); // give an initial impulse
-        //soundManager = FindObjectOfType<SoundManager>();
+        soundManager = FindObjectOfType<SoundManager>();
         if (SceneManager.GetActiveScene().name == "Level2Scene")
             StartGame();
 
@@ -43,6 +43,8 @@ public class PlayerScript : MonoBehaviour
         {
             if (isAlive)
             {
+                if (!soundManager.checkIfIsPlaying(rocketSound))
+                    soundManager.PlaySound(rocketSound);
                 if (Input.GetKey(KeyCode.Space))
                 {
                     TurnOffParticles();
@@ -51,13 +53,18 @@ public class PlayerScript : MonoBehaviour
                 }
                 else if (Input.GetKey(KeyCode.LeftShift))
                 {
-                    //soundManager.PlaySound(boostSound);
+                    if (Input.GetKeyUp(KeyCode.LeftShift))
+                    {
+                        soundManager.StopSound(boostSound);
+                        soundManager.PlaySound(rocketSound);
+                    }
+                    if (Input.GetKeyDown(KeyCode.LeftShift))
+                        soundManager.PlaySound(boostSound);
                     Boost();
                 }
                 else
                 {
                     TurnOnParticles();
-                    //soundManager.PlaySound(rocketSound);
                     rb.velocity = Camera.main.transform.forward * 15.0f;
                 }
 

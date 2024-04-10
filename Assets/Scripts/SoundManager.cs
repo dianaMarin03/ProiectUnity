@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -14,6 +12,15 @@ public class SoundManager : MonoBehaviour
     void Update()
     {
 
+    }
+    public bool checkIfIsPlaying(AudioClip audioClip)
+    {
+        return audioSource.isPlaying;
+    }
+    public void StopSound(AudioClip audioClip)
+    {
+        audioSource.clip = audioClip;
+        audioSource.Stop();
     }
     public void PlaySound(AudioClip clip)
     {
