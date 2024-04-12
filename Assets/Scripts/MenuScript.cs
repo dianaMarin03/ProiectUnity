@@ -29,7 +29,6 @@ public class MenuScript : MonoBehaviour
         if(gameObject.name == "Start")
         {
             menuCamera.enabled = false;
-            soundManager.StopSound(menuSound);
             playerScript.StartGame();
         } else if (gameObject.name == "Quit")
         {

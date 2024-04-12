@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.031483587, g: 0.009458372, b: 0.013140744, a: 1}
+  m_IndirectSpecularColor: {r: 0.031420033, g: 0.009449618, b: 0.013080895, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5184,7 +5184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuCamera: {fileID: 0}
   mainCamera: {fileID: 0}
-  menuSound: {fileID: 0}
+  menuSound: {fileID: 8300000, guid: eeb50c33bd9d0bd46b00c0ee58eeaece, type: 3}
 --- !u!23 &113266431
 MeshRenderer:
   m_ObjectHideFlags: 0
